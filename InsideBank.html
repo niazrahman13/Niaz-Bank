@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <head>
+        <h1 class="text-5xl font-medium text-center mt-10">Keep Safe from <span
+                class="text-violet-600">Unnecessary</span> Things
+        </h1>
+    </head>
+    <main>
+        <section class="grid grid-cols-3 gap-4 w-9/12 mx-auto mt-20">
+            <div class="bg-green-300 p-9 font-medium rounded-lg text-2xl text-white">
+                <h4>Deposit</h1>
+                    <h2 class="text-5xl">$<span id="depositBox">00</span></h2>
+            </div>
+            <div class="bg-amber-300 p-9 font-medium rounded-lg text-2xl text-white">
+                <h4>Withdraw</h1>
+                    <h2 class="text-5xl">$<span id="withdrawBox">00</span></h2>
+            </div>
+            <div class="bg-pink-600 p-9 font-medium rounded-lg text-2xl text-white">
+                <h4>Balance</h1>
+                    <h2 class="text-5xl">$<span id="balanceBox">1240</span></h2>
+            </div>
+        </section>
+
+        <section class="grid grid-cols-2 gap-4 mt-20 w-9/12 mx-auto">
+            <div class="bg-blue-400 p-5 rounded-lg">
+                <h3 class="text-2xl text-white mb-4">Please Deposit</h3>
+                <input class="block mt-3 w-9/12 p-2 rounded-medium" type="text" name="" id="depositInput"
+                    placeholder="$ Amount you want to deposit">
+                <button class="mt-5 bg-blue-900 py-2 px-3 text-white rounded-lg" id="depositButton">Deposit</button>
+            </div>
+            <div class="bg-violet-400 p-5 rounded-lg">
+                <h3 class="text-2xl text-white mb-4">Please Withdraw</h3>
+                <input class="block mt-3 w-9/12 p-2 rounded-medium" type="text" name="" id="withdrawInput"
+                    placeholder="$ Amount you want to Withdraw">
+                <button class="mt-5 bg-blue-900 py-2 px-3 text-white rounded-lg" id="withdrawButton">Withdraw</button>
+            </div>
+        </section>
+    </main>
+    <script>
+        document.getElementById('depositButton').addEventListener('click', function () {
+            let x = document.getElementById('depositInput').value
+            if (isNaN(x)) {
+                let x = document.getElementById('depositInput')
+                x.value = ''
+                alert('Invalid Input')
+            } else {
+                let y = document.getElementById('depositBox')
+                // এখানে আমরা ইনপুটের মান কে x এ রাখলাম
+                //এরপরে deposit box এর ট্যাগ কে y তে রাখলাম,
+                // এরপরে total variable এ x er value আর deposit box(y variable) এর innerTEXT কে যোগ করালাম
+                // এরপরে deposit box e abar total ke boshay dilam
+                const total = parseFloat(x) + parseFloat(y.innerText)
+                //এখানে parseFloat দিলাম কারণ আমরা string কে ইনপুট হিসেবে নিসি,যোগ করলে যোগ হবেনা
+                y.innerText = total
+
+                const balanceBox = document.getElementById('balanceBox')
+                const store = parseFloat(balanceBox.innerText)
+                const result = store + parseFloat(x)
+                balanceBox.innerText = result
+
+                let z = document.getElementById('depositInput')
+                //z এর মধ্যে প্রথমে ইনপুট এর বক্স কে আনা হইসে,এরপরে এর ভিতরে value কে ধরে '' দেওয়া হইসে যার ফলে পরে ব্ল্যাংক হবে
+                z.value = ''
+            }
+
+        })
+
+        //WITHDRAW PART
+
+        document.getElementById('withdrawButton').addEventListener('click', function () {
+            let withdrawInput = document.getElementById('withdrawInput').value
+
+            if (isNaN(withdrawInput)) {
+                let withdrawInput = document.getElementById('withdrawInput')
+                withdrawInput.value = ''
+                alert('Invalid Output')
+
+            }
+            else {
+                let withdrawBox = document.getElementById('withdrawBox')
+                const sum = parseFloat(withdrawInput) + parseFloat(withdrawBox.innerText)
+                withdrawBox.innerText = sum
+                let balance = document.getElementById('balanceBox')
+                const result = parseFloat(balance.innerText) - parseFloat(withdrawInput)
+                balance.innerText = result
+                let final = document.getElementById('withdrawInput')
+                final.value = ''
+            }
+
+        })
+    </script>
+</body>
+
+</html>
